@@ -33,16 +33,16 @@ Na ovoj stranici predajete zadatke.
     }
 
     function sanitize(str) {
-    return str
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // uklanja dijakritiku (č → c, ć → c)
-      .replace(/[^a-zA-Z0-9_-]/g, "_"); // sve ostalo pretvara u _
-  }
+      return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")   // č ć š đ ž → c s d z
+        .replace(/[^a-zA-Z0-9_-]/g, "_");  // sve ostalo → _
+    }
 
     const imeSafe = sanitize(ime);
     const prezimeSafe = sanitize(prezime);
 
-    const filePath = `${ime}_${prezime}/${Date.now()}-${file.name}`;
+    const filePath = `${imeSafe}_${prezimeSafe}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_")}`;
 
     const { data, error } = await supabase.storage
       .from("submissions")
