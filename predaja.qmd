@@ -54,7 +54,6 @@ Na ovoj stranici predajete zadatke.
           putanja: file.path
         }
       ]);
-    
     if (dbError) {
       console.error("DB ERROR:", dbError);
       alert("Datoteka je spremljena, ali zapis nije upisan u bazu.");
