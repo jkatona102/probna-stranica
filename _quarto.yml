@@ -9,12 +9,12 @@ website:
         text: Home
       - about.qmd
       - kombinatorika.qmd
+      - predaja.qmd
   announcement: 
     icon: info-circle
     content: "**VAŽNO** - web stranica je još u razvoju"
     type: primary
     position: below-navbar
-  page-footer: "© 2026 Jan Katona — Sva prava pridržana"
 
 format:
   html:

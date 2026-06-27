@@ -1,0 +1,67 @@
+# Predaja zadataka
+
+Na ovoj stranici predajete zadatke.
+
+<div class="upload-form">
+  <h3>Predaja rješenja</h3>
+
+  <input type="text" id="ime" placeholder="Ime">
+
+  <input type="text" id="prezime" placeholder="Prezime">
+
+  <input type="file" id="file">
+
+  <button onclick="upload()">Pošalji rješenje</button>
+</div>
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+  const supabaseUrl = "https://jwsvnvvexmwnvjovdbyg.supabase.co";
+  const supabaseKey = "sb_publishable_OJODRwGSdsFkc78-XMO_LQ__B_a2EJ3";
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  window.upload = async function () {
+    const ime = document.getElementById("ime").value.trim();
+    const prezime = document.getElementById("prezime").value.trim();
+    const file = document.getElementById("file").files[0];
+
+    if (!ime || !prezime || !file) {
+      alert("Popuni ime, prezime i odaberi file.");
+      return;
+    }
+
+    const filePath = `${ime}_${prezime}/${Date.now()}-${file.name}`;
+
+    const { data, error } = await supabase.storage
+      .from("submissions")
+      .upload(filePath, file);
+
+    if (error) {
+      console.error(error);
+      alert("Greška pri uploadu");
+      return;
+    }
+
+    const { error: dbError } = await supabase
+      .from("predaje")
+      .insert([
+        {
+          ime: ime,
+          prezime: prezime,
+          datoteka: file.name,
+          putanja: file.path
+        }
+      ]);
+    
+    if (dbError) {
+      console.error("DB ERROR:", dbError);
+      alert("Datoteka je spremljena, ali zapis nije upisan u bazu.");
+      return;
+    }
+
+    alert("Upload uspješan!");
+    console.log("Upload data:", data);
+  };
+</script>
