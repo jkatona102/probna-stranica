@@ -1,0 +1,152 @@
+body {
+  counter-reset: zadatak;
+  counter-reset: primjer;
+  counter-reset: teorem;
+}
+
+.zadatak {
+  counter-increment: zadatak;
+
+  border-left: 6px solid #4281ff !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  background: #edf3ff !important;
+  border-radius: 6px;
+  padding: 0.8em;
+  margin: 1em 0;
+}
+
+.zadatak::before {
+  content: "Zadatak " counter(zadatak);
+  display: block;
+  font-weight: bold;
+}
+
+.rjesenje {
+  border-left: 6px solid #dcdcdc !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-radius: 6px;
+  padding: 0.8em;
+  margin: 1em 0;
+  overflow: hidden;
+}
+
+.rjesenje::before {
+  content: "Rješenje " counter(zadatak);
+  display: block;
+  font-weight: bold;
+
+  margin: -1em -1em 1em -1em;
+  padding: 0.6em 1em;
+  background: #f0f0f0;
+  font-weight: bold;
+
+  box-sizing: border-box;
+}
+
+.primjer {
+  counter-increment: primjer;
+  border-left: 5px solid #ffd900 !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-radius: 6px;
+  padding: 0.8em;
+  margin: 1em 0;
+}
+
+.primjer::before {
+  content: "Primjer " counter(primjer);
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.rjesenje-primjera {
+  border: 2px solid #f1f1f1 !important;
+  border-radius: 4px;
+  padding: 1em
+}
+
+.rjesenje-primjera::before {
+  content: "Rješenje";
+  font-weight: bold;
+}
+
+.teorem{
+  counter-increment: teorem;
+
+  border-left: 5px solid rgb(0, 141, 197) !important;
+  border-radius: 4px;
+  background-color: #fafafa !important;
+  padding: 1em;
+  margin: 1em 0;
+
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.teorem::before {
+  content: "Teorem " counter(teorem);
+  display: block;
+  margin: -1em -1em 1em -1em;
+  padding: 0.6em 1em;
+
+  background: #dbe9ff;
+  font-weight: bold;
+
+  box-sizing: border-box;
+}
+mjx-container {
+  display: inline-block !important;
+}
+
+mjx-container[display="true"] {
+  display: block !important;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0.8em 0;
+}
+
+.upload-form {
+  max-width: 500px;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #f8fafc;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.upload-form h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.upload-form input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.upload-form input[type="text"]:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.upload-form input[type="file"] {
+  margin-bottom: 1rem;
+}
+
+.upload-form button {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.upload-form button:hover {
+  opacity: 0.9;
+}
