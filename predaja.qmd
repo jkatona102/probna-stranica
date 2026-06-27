@@ -32,6 +32,16 @@ Na ovoj stranici predajete zadatke.
       return;
     }
 
+    function sanitize(str) {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // uklanja dijakritiku (č → c, ć → c)
+      .replace(/[^a-zA-Z0-9_-]/g, "_"); // sve ostalo pretvara u _
+  }
+
+    const imeSafe = sanitize(ime);
+    const prezimeSafe = sanitize(prezime);
+
     const filePath = `${ime}_${prezime}/${Date.now()}-${file.name}`;
 
     const { data, error } = await supabase.storage
@@ -51,9 +61,10 @@ Na ovoj stranici predajete zadatke.
           ime: ime,
           prezime: prezime,
           datoteka: file.name,
-          putanja: file.path
+          putanja: filePath
         }
       ]);
+
     if (dbError) {
       console.error("DB ERROR:", dbError);
       alert("Datoteka je spremljena, ali zapis nije upisan u bazu.");
