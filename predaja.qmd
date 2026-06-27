@@ -49,8 +49,8 @@ Na ovoj stranici predajete zadatke.
       .upload(filePath, file);
 
     if (error) {
-      console.error(error);
-      alert("Greška pri uploadu");
+      console.error("UPLOAD ERROR FULL:", error);
+      alert(JSON.stringify(error));
       return;
     }
 
