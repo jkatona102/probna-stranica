@@ -56,6 +56,11 @@ Na ovoj stranici predajete zadatke.
 
     const { error: dbError } = await supabase
       .from("predaje")
+      console.log("INSERTING INTO DB:", {
+        ime,
+        prezime,
+        filePath
+      });
       .insert([
         {
           ime: ime,
