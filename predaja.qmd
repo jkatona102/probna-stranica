@@ -54,21 +54,20 @@ Na ovoj stranici predajete zadatke.
       return;
     }
 
-    const { error: dbError } = await supabase
+    const result = await supabase
       .from("predaje")
-      console.log("INSERTING INTO DB:", {
-        ime,
-        prezime,
-        filePath
-      });
       .insert([
         {
-          ime: ime,
-          prezime: prezime,
+          ime,
+          prezime,
           datoteka: file.name,
           putanja: filePath
         }
-      ]);
+      ])
+      .select();
+
+    console.log("RESULT:", result);
+    alert(JSON.stringify(result));
 
     if (dbError) {
       console.error("DB ERROR:", dbError);
